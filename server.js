@@ -21,9 +21,14 @@ app.get('/', function (req, res) {
 // get time request
 app.get('/api/timestamp/:date_string?', function (req, res) {
   let ds = req.params.date_string
-  ds = ds.includes("-") ? ds : parseInt(ds)
-  let date = isNaN(ds) ? new Date() : new Date(ds)
-  res.json({'unix': date.getTime(), 'utc': date.toUTCString()})
+  let date
+  if (!ds){
+    date = new Date()
+  }else{
+    ds = ds.includes("-") ? ds : parseInt(ds)
+    date = new Date(ds)
+  }
+  return res.json({'unix': date.getTime(), 'utc': date.toUTCString()})
 })
 
 // listen for requests :)
