@@ -18,14 +18,9 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html')
 })
 
-// your first API endpoint...
-app.get('/api/hello', function (req, res) {
-  res.json({greeting: 'hello API'})
-})
-
 // get time request
 app.get('/api/timestamp/:date_string?', function (req, res) {
-  let ds = req.params.date_string ? new Date(req.params.date_string) : new Date()
+  let ds = req.params.date_string ? new Date(parseInt(req.params.date_string)) : new Date()
   res.json({'unix': ds.getTime(), 'utc': ds.toUTCString()})
 })
 
